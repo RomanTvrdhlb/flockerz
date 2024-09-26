@@ -1,0 +1,37 @@
+.step-list{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+
+    &__bg{
+        display: none;
+    }
+
+    &__item{
+        --bs-gutter-x: 24px;
+  
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: calc(-.5* var(--bs-gutter-x));
+        margin-left: calc(-.5* var(--bs-gutter-x));
+
+        .step-card{
+            flex: 0 0 auto;
+            width: 58.33333333%;
+            position: relative;
+            max-width: 100%;
+            padding-right: calc(var(--bs-gutter-x)* .5);
+        }
+
+        &:nth-child(even){
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__image{
+        flex: 0 0 auto;
+        width: 41.66666667%;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x)* .5);
+    }
+}

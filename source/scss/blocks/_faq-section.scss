@@ -1,0 +1,86 @@
+.faq-section{
+    position: relative;
+
+    @include for-mobile{
+        background: transparent url(../img/sprite/faq_bg_desktop.svg) no-repeat 96% 80px;
+        background-size: cover;
+        padding: 100px 0 70px;
+        margin-top: -100px;
+    }
+
+    @include mobile{
+        margin: -120px auto 0;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    &__box{
+       display: grid;
+       grid-template-columns: .66fr 1fr;
+       grid-gap: 24px;
+       align-items: center;
+
+       @include tablet{
+        grid-template-columns: 100%;
+       }
+    }
+
+    &__wrapp{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 48px;
+
+        @include tablet{
+            order: -1;
+        }
+    }
+
+    &__title{
+        margin-top: 48px;
+        font-size: 90px;
+        height: 100px;
+        rotate: 12deg;
+        -webkit-text-stroke: 3px rgba(var(--cl-b),1.0);
+        color: rgba(var(--cl-d),1.0);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline;
+        width: 100%;
+        overflow: hidden;
+        max-width:250px;
+        align-self: flex-start;
+        margin-left: 40px;
+    }
+
+    &__subtitle{
+        transform: rotate(-3deg);
+    }
+
+    &__image{
+        width: 100%;
+        max-width: 630px;
+
+        img{
+            vertical-align: middle;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__inner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .main-btn{
+            rotate: -6deg;
+            margin-top: 30px;
+        }
+    }
+
+    .socials{
+        align-self: flex-start;
+        margin:30px 0 0 64px;
+    }
+}

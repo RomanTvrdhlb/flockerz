@@ -1,0 +1,27 @@
+.promo-list {
+  opacity: 0.5;
+  grid-gap: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: flex;
+
+  padding: 15px 0;
+
+  &__item {
+    @include mobile{
+        width: calc(50% - 25px);
+    }
+
+    img,
+    svg {
+      max-height: 80px;
+      width: auto;
+      filter: contrast(200%);
+      max-width: 100%;
+      padding: 8px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}

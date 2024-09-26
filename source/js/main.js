@@ -1,14 +1,14 @@
 //-----vars---------------------------------------
-const header = document.querySelector(".h2o-header");
+const header = document.querySelector(".header");
 const overlay = document.querySelector("[data-overlay]");
-const mobileMenu = document.querySelector(".h2o-mobile-menu");
-const burgers = document.querySelectorAll(".h2o-burger");
+const mobileMenu = document.querySelector(".mobile");
+const burgers = document.querySelectorAll(".burger");
 const accParrent = [...document.querySelectorAll("[data-accordion-init]")];
 const htmlEl = document.documentElement;
 const bodyEl = document.body;
-const slotsSliders = document.querySelectorAll('.h2o-slots-slider');
-const infoSliders = document.querySelectorAll('.h2o-info-slider');
-const paySliders = document.querySelectorAll('.h2o-pay-slider');
+const mainSliders = document.querySelectorAll('.main-slider');
+const aboutSLiders = document.querySelectorAll('.about-slider');
+
 //------------------------------------------------
 
 //----customFunction------------------------------
@@ -279,100 +279,80 @@ elementHeight(header, "header-height");
    }
  };
  
- window.addEventListener("resize", () => {
-     replaceElementsFunction(
-      sidebar,
-      sideBarParent,
-      sideBarParentMob,
-       1024,
-       "afterend",
-       "beforeend"
-     )
- });
- window.addEventListener("DOMContentLoaded", () => {
-     replaceElementsFunction(
-      sidebar,
-      sideBarParent,
-      sideBarParentMob,
-       1024,
-     "afterend",
-     "beforeend"
-     )
- });
+
 //---------------------------------------------------
-slotsSliders && slotsSliders.forEach(function(slotsSlider){
-  new Splide( slotsSlider, {
-    type       : 'loop',
-    speed      : 1800,
-    pagination : true,
-    arrows     : true,
-    perPage    : 3,
-    gap        : 20,
-    autoplay   : true,
-    interval   : 2500,
-    breakpoints: {
-      1024: {
-        perPage: 2,
-      },
-      576: {
-        perPage: 1,
-      },
-    },
-  } ).mount(); 
-});
-
-infoSliders && infoSliders.forEach(function(infoSlider){
-  const slider = infoSlider.querySelector('.splide');
-
-  var splide = new Splide( slider, {
-    type       : 'loop',
-    speed      : 1000,
-    pagination : false,
-    arrows     : false, 
-    perPage    : 2,
-    gap        : 20,
-    interval   : 2500,
-    breakpoints: {
-      1024: {
-        perPage: 2,
-      },
-      768: {
-        perPage: 1,
-      },
-    },
-  } ).mount(); 
-
-  var totalSlides = splide.Components.Elements.slides.length;
-  document.getElementById('totalSlides').textContent = totalSlides;
-
-  splide.on('move', function (newIndex) {
-    document.getElementById('currentSlide').textContent = newIndex + 1;
+document.addEventListener('DOMContentLoaded', function (){
+  mainSliders.forEach(function(slider){
+      const container = slider.querySelector('.swiper-container');
+      const nextBtn = slider.querySelector(".next");
+      const prevBtn = slider.querySelector(".prev");
+   
+      const mainSwiper = new Swiper(container, {
+          spaceBetween: 0,
+          slidesPerView: 2,
+          speed: 1800,
+          watchOverflow: true,
+          observer: true,
+          observeParents: true,
+          initialSlide: 0,
+          loop: true,
+          centeredSlides: true,
+         
+          navigation: {
+              nextEl: nextBtn,
+              prevEl: prevBtn,
+          },
+       
+          breakpoints: {
+            320: {
+              slidesPerView: 2,
+            },
+            1920: {
+              slidesPerView: 2.5,
+            }
+          }
+      });
   });
 
-  document.getElementById('prevSlide').addEventListener('click', function () {
-    splide.go('-1');
-  });
+  aboutSLiders.forEach(function(slider) {
+    const container = slider.querySelector('.swiper-container');
+    const nextBtn = slider.querySelector(".next");
+    const prevBtn = slider.querySelector(".prev");
 
-  document.getElementById('nextSlide').addEventListener('click', function () {
-    splide.go('+1');
-  });
+    let aboutSwiper = new Swiper(container, {
+        spaceBetween: 20,
+        slidesPerView: 1.5,
+        speed: 1800,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        autoHeight: true,
+        allowTouchMove: window.innerWidth <= 1024,
 
+        navigation: {
+            nextEl: nextBtn,
+            prevEl: prevBtn,
+        }
+    });
 
+  
+    function updateSwiperOnResize() {
+        const width = window.innerWidth;
 
+        if (width > 1024) {
+            aboutSwiper.allowTouchMove = false;
+        } else {
+            aboutSwiper.allowTouchMove = true;
+        }
+
+        aboutSwiper.update();
+    }
+
+    window.addEventListener('resize', updateSwiperOnResize);
+
+    updateSwiperOnResize();
 });
-
-paySliders && paySliders.forEach(function(paySlider){
-  new Splide( paySlider, {
-    type       : 'loop',
-    speed      : 1800,
-    pagination : false,
-    arrows     : true,
-    perPage    : 3,
-    gap        : 10,
-    autoplay   : true,
-    interval   : 5000,
-  } ).mount(); 
-});
+})
 //-----------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
   const cards = document.querySelectorAll('.h2o-rating-card');

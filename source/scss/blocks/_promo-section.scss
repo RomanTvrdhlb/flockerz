@@ -1,0 +1,52 @@
+.promo-section{
+    position: relative;
+    z-index: 2;
+
+    @include for-mobile{
+        padding-bottom: 150px;
+    }
+
+    @include mobile{
+        padding-top: 150px;
+        padding-bottom: 50px;
+    }
+
+    &__box{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 48px;
+    }
+
+    &__top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        grid-gap: 20px;
+        position: relative;
+
+        .title{
+            padding-inline: 100px;
+            transform: rotate(-3deg);
+        }
+    }
+
+    &__icon{
+        position: absolute;
+        right: 0;
+        top: -100px; 
+        display: block;
+        width: 300px clamp(200px, 20.1884vw, 300px);
+        height: clamp(120px, 13.459vw, 200px);
+
+        @include mobile{
+            top: -150px;
+            right: unset;
+            left: -50px;
+        }
+
+        img,svg{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

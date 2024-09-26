@@ -1,0 +1,100 @@
+.faq-card {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+  width: 100%;
+
+  &__title {
+    font-family: badaboom-bb, sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: rgba(var(--cl-b), 1);
+  }
+
+  p {
+    font-family: HeyComic, sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  &.one {
+    background: transparent url(../img/index/faq-one.png) no-repeat 0 0;
+    background-size: 100% 100%;
+
+
+    @include for-desktop{
+        height: 322px;
+        padding: 67px 70px 35px 100px;
+    }
+
+    @include desktop{
+        padding: 44px 70px 35px 100px;
+    }
+
+    @include mobile{
+        padding: 71px 50px 35px;
+        min-width: 514px;
+    }
+  }
+
+  &.two {
+  
+    background: transparent url(../img/index/faq-two.png) no-repeat 0 0;
+    background-size: 100% 100%;
+
+    @include for-desktop{
+        height: 275px;
+        padding: 40px 53px 64px 100px;
+    }
+
+    @include desktop{
+        padding: 25px 53px 64px 100px;
+    }
+
+    @include mobile{
+        padding: 38px 50px 80px;
+        min-width: 514px;
+    }
+  }
+
+  &.three {
+    background: transparent url(../img/index/faq-three.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    margin-top: -54px;
+
+    @include for-desktop{
+        height: 265px;
+        padding: 74px 91px 41px 100px;
+    }
+
+    @include desktop{
+        padding: 57px 70px 41px 100px;
+    }
+
+    @include mobile{
+        padding: 100px 50px 40px;
+        min-width: 514px;
+    }
+  }
+
+  &.four {
+    background: transparent url(../img/index/faq-four.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    margin-left: -30px;
+
+    @include for-desktop{
+        height: 265px;
+        padding: 74px 70px 41px 130px;
+    }
+
+    @include desktop{
+        padding: 34px 53px 69px 125px;
+    }
+
+    @include mobile{
+        padding: 40px 38px 70px 78px;
+        min-width: 514px;
+    }
+  }
+}

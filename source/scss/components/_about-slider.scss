@@ -1,0 +1,47 @@
+.about-slider {
+    position: relative;
+    width: 100%;
+  
+    @include tablet {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+    }
+
+    &__nav {
+        @include for-tablet {
+          display: none;
+        }
+
+        @include tablet{
+            margin-top: 24px;
+        }
+      }
+  
+    .swiper {
+      &-container {
+        max-width: 100%;
+  
+        @include tablet {
+          padding: 0 16px;
+        }
+      }
+  
+      &-wrapper {
+        @include for-tablet {
+            grid-template-columns: repeat(2, 1fr);
+            display: grid;
+            grid-gap:32px 24px;
+            transform: none !important;
+            height: 100% !important;
+        }
+      }
+  
+      &-slide {
+        @include for-tablet {
+          width: 100% !important;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+  

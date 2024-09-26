@@ -1,0 +1,28 @@
+.socials{
+    display: flex;
+    grid-gap: 20px;
+    align-items: center;
+
+
+    &__item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__link{
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        background: rgba(var(--cl-e),1.0);
+        outline: solid 4px var(--br-a);
+
+        &.tg{
+            outline: solid 4px var(--br-a);
+            background: rgba(var(--bg-b),1.0);
+        }
+    }
+}

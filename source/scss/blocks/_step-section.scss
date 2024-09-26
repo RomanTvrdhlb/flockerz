@@ -1,0 +1,13 @@
+.step-section{
+    position: relative;
+    padding: 80px 0;
+    
+    .title{
+        position: absolute;
+        left: 26%;
+        top: -51px;
+        z-index: 2;
+        paint-order: stroke fill;
+        transform: rotate(-3deg);
+    }
+}
