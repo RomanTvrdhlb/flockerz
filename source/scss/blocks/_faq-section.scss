@@ -1,6 +1,10 @@
 .faq-section{
     position: relative;
 
+    @include tablet{
+        overflow: hidden;
+    }
+
     @include for-mobile{
         background: transparent url(../img/sprite/faq_bg_desktop.svg) no-repeat 96% 80px;
         background-size: cover;
@@ -9,9 +13,7 @@
     }
 
     @include mobile{
-        margin: -120px auto 0;
-        text-align: left;
-        overflow: hidden;
+        padding-bottom: 20px;
     }
 
     &__box{
@@ -19,6 +21,13 @@
        grid-template-columns: .66fr 1fr;
        grid-gap: 24px;
        align-items: center;
+
+       @include laptop{
+        @include for-tablet{
+            grid-template-columns: .3fr 1fr;
+            grid-gap: 12px;
+        }
+       }
 
        @include tablet{
         grid-template-columns: 100%;
@@ -37,7 +46,7 @@
 
     &__title{
         margin-top: 48px;
-        font-size: 90px;
+        font-size: clamp(44px, 4.8452vw, 72px);
         height: 100px;
         rotate: 12deg;
         -webkit-text-stroke: 3px rgba(var(--cl-b),1.0);
@@ -47,13 +56,53 @@
         display: inline;
         width: 100%;
         overflow: hidden;
-        max-width:250px;
         align-self: flex-start;
         margin-left: 40px;
+
+        @include laptop{
+            @include for-tablet{
+                max-width: 90%;
+            }
+        }
+
+        @include tablet{
+            font-size: clamp(30px, 8.789vw, 90px);
+        }
+
+        @include mobile{
+            rotate: -1deg;
+            height: initial;
+            margin-left: 0;
+        }
+    }
+
+    &__icon{
+        @include mobile{
+            height: 150px;
+            width: 180px;
+            position: absolute;
+            top: -93px;
+            right: 10px;
+            z-index: 1;
+
+            svg,img{
+                width: 100%;
+                height: auto;
+            }
+        }
     }
 
     &__subtitle{
         transform: rotate(-3deg);
+        font-size: clamp(45px, 3.6339vw, 54px);
+
+        @include tablet{
+            align-self: center;
+        }
+
+        @include mobile{
+            font-size: 30px;
+        }
     }
 
     &__image{
@@ -64,6 +113,10 @@
             vertical-align: middle;
             width: 100%;
             height: auto;
+        }
+
+        @include mobile{
+            width: 115%;
         }
     }
 
@@ -76,11 +129,34 @@
         .main-btn{
             rotate: -6deg;
             margin-top: 30px;
+
+            @include mobile{
+                font-size: 25px;
+                border-width: 2px;
+                -webkit-text-stroke: 4px black;
+                paint-order: stroke fill;
+                margin-bottom: 70px;
+            }
+        }
+
+        @include small-tablet{
+            position: relative;
+        }
+
+        @include mobile{
+        background: transparent url(../img/sprite/faq_bg_desktop.svg);
+        background-size: 235%;
+        background-repeat: no-repeat;
+        background-position: center;
         }
     }
 
     .socials{
         align-self: flex-start;
         margin:30px 0 0 64px;
+
+        @include mobile{
+            margin:15px 0 0 24px;
+        }
     }
 }

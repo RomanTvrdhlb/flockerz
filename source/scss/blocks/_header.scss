@@ -1,0 +1,82 @@
+.header {
+  left: 0;
+  right: 0;
+  top: 0;
+  position: fixed;
+  z-index: 30;
+ 
+  &.sticky, &.active{
+    background: rgba(var(--bg-c),1.0);
+    box-shadow: 0 4px 8px #0000, 0 6px 20px #0000001f;
+  }
+ 
+
+  .main-nav{
+    padding: 8px 0;
+    margin-top: 8px;
+    justify-content: center;
+
+    ul{
+      grid-gap: 4px 14px;
+
+      a{
+          padding: 10px 0;
+          cursor: pointer;
+          text-decoration: none;
+          font-weight: 500;
+          -webkit-text-stroke: 3px rgba(var(--cl-b),1.0);
+          letter-spacing: .2px;
+
+          &:hover{
+            color: rgba(var(--cl-h),1.0);
+          }
+
+          @include for-laptop{
+            margin: 0 7px;
+            font-size: clamp(20px, 1.8843vw, 28px);
+          }
+
+          @include laptop{
+            font-size: 20px;
+          }
+      }
+    }
+  }
+
+  &__box {
+    display: grid;
+    position: relative;
+    z-index: 2;
+    align-items: center;
+    grid-gap: 24px;
+
+    @include for-tablet {
+      margin-top: 27px;
+      grid-template-columns: clamp(230px, 17.6312vw, 262px) 1fr clamp(230px, 17.6312vw, 262px);
+    }
+
+    @include tablet {
+      margin-top: 20px;
+      align-items: center;
+      grid-template-columns: auto 1fr;
+      grid-gap: 4px;
+    }
+
+    .transparent-btn{
+      justify-self: end;
+    }
+  }
+
+ 
+  .burger {
+    @include for-tablet {
+      display: none;
+    }
+
+    @include tablet {
+      justify-self: end;
+      @include burger;
+    }
+  }
+}
+

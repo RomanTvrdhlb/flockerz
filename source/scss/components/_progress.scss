@@ -1,0 +1,28 @@
+.progress{
+    width: 90%;
+    border-radius: 18px;
+    height: 24px;
+    border: 2px solid var(--br-a);
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(var(--bg-h),1.0);
+    z-index: 1;
+
+    &__bar{
+        border-radius: 20px;
+        background:  rgba(var(--bg-c),1.0);
+        display: block;
+        height: 100%;
+    }
+
+    &__status{
+        position: absolute;
+        inset: 0;
+        font-size: 12px;
+        text-align: center;
+        line-height: 22px;
+        z-index: 2;
+        color: rgba(var(--cl-a),1.0);
+    }
+}

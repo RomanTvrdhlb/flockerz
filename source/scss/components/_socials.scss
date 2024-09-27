@@ -19,10 +19,49 @@
         border-radius: 100%;
         background: rgba(var(--cl-e),1.0);
         outline: solid 4px var(--br-a);
+        position: relative;
+
+        @include mobile{
+            width: 60px;
+            height: 60px;
+        }
 
         &.tg{
             outline: solid 4px var(--br-a);
             background: rgba(var(--bg-b),1.0);
         }
+
+        &.mode{
+            background: rgba(var(--bg-b),1.0);
+            width: 75px;
+            height: 75px;
+            outline: none;
+
+            @include mobile{
+                width: 65px;
+                height: 65px;
+            }
+        }
+
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__label{
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        font-family: var(--second-family);
+        padding: 3px 15px;
+        background-color: #f5882d;
+        color: #fff;
+        -webkit-text-stroke: 5px #000000;
+        font-weight: 500;
+        letter-spacing: 2px;
+        paint-order: stroke fill;
+        border: 3px solid #000000;
+        transform: translate(-50%) rotate(-3deg);
     }
 }

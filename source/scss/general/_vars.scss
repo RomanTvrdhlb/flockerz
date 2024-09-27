@@ -22,14 +22,15 @@
     }
 
 // --------------- default scroll variable ---------------
-  --scrollbar-thumb: #fc0;
-  --scrollbar-track:  #18040d;
-  --scrollbar-track-hover: #18040d;
+  --scrollbar-thumb: #F5882D;
+  --scrollbar-track:  #4D6CC3;
+  --scrollbar-track-hover: #4D6CC3;
   --overlay-bg: rgba(0, 0, 0, 0.5);
 
 // --------------- default font-family variable ---------------
-  --font-family: "Inter" , sans-serif; // var(--font-family);
-  --second-family: "Poppins" , sans-serif; // var(--second-family);
+  --font-family: "HeyComic" , sans-serif; // var(--font-family);
+  --second-family: "badaboom" , sans-serif; // var(--second-family);
+  --font3: "Poppins" , sans-serif; // var(--font3);
 
 // --------------- default text color variable ---------------
   --cl-a: #{HexToRGB(#ffffff)}; // rgba(var(--cl-a),1.0);
@@ -38,11 +39,9 @@
   --cl-d: #{HexToRGB(#FF8000)}; // rgba(var(--cl-d),1.0);
   --cl-e: #{HexToRGB(#F5882D)}; // rgba(var(--cl-e),1.0);
   --cl-f: #{HexToRGB(#e96a00)}; // rgba(var(--cl-f),1.0);
-
-
-  --cl-g: #{HexToRGB(#f6f6f6)}; // rgba(var(--cl-g),1.0);
-  --cl-h: #{HexToRGB(#313131)}; // rgba(var(--cl-h),1.0);
-  --cl-j: #{HexToRGB(#555555)}; // rgba(var(--cl-j),1.0);
+  --cl-g: #{HexToRGB(#2045ca)}; // rgba(var(--cl-g),1.0);
+  --cl-h: #{HexToRGB(#50b861)}; // rgba(var(--cl-h),1.0);
+  --cl-j: #{HexToRGB(#4d6cc3)}; // rgba(var(--cl-j),1.0);
 
 // --------------- default background color variable ---------------
   --bg-a: #{HexToRGB(#ffffff)}; // rgba(var(--bg-a),1.0);
@@ -50,16 +49,13 @@
   --bg-c: #{HexToRGB(#f5882d)}; // rgba(var(--bg-c),1.0);
   --bg-d: #{HexToRGB(#c1daea)}; // rgba(var(--bg-d),1.0);
   --bg-e: #{HexToRGB(#e0e0e0)}; // rgba(var(--bg-e),1.0);
-
-
-  --bg-f: #{HexToRGB(#f5882d)}; // rgba(var(--bg-f),1.0);
-  --bg-g: #{HexToRGB(#bb6a15)}; // rgba(var(--bg-g),1.0);
+  --bg-f: #{HexToRGB(#2045ca)}; // rgba(var(--bg-f),1.0);
+  --bg-g: #{HexToRGB(#f79a4d)}; // rgba(var(--bg-g),1.0);
+  --bg-h: #{HexToRGB(#4961a5)}; // rgba(var(--bg-h),1.0);
+  --bg-j: #{HexToRGB(#4d6cc3)}; // rgba(var(--bg-j),1.0);
  
 // --------------- default border color color variable --------------
   --br-a: #000000; // var(--br-a);
-
-  --br-b: #fff; // var(--br-b);
-  --br-c: #3e3e3e; // var(--br-c);
 
 // --------------- default gradient color variable ---------------
 --gr-a: linear-gradient(135deg, #ffffff 15%, #ffcc00 75%); // var(--gr-a);

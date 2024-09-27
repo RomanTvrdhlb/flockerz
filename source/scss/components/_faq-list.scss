@@ -1,9 +1,17 @@
-.faq-list{
-    display: flex;
-    flex-direction: column;
-    grid-gap: 20px;
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
 
-  &__item{
-   
+  @include mobile {
+    grid-gap: 10px;
+  }
+
+  &__item {
+    @include mobile {
+      &:nth-child(3) {
+        margin-top: -15px;
+      }
+    }
   }
 }

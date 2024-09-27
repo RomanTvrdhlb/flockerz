@@ -7,11 +7,36 @@ const accParrent = [...document.querySelectorAll("[data-accordion-init]")];
 const htmlEl = document.documentElement;
 const bodyEl = document.body;
 const mainSliders = document.querySelectorAll('.main-slider');
-const aboutSLiders = document.querySelectorAll('.about-slider');
+const aboutSliders = document.querySelectorAll('.about-slider');
+const historySliders = document.querySelectorAll('.history-slider');
+const activeMode = 'active-mode';
+const activeClass = 'active';
+const modals = document.querySelectorAll('[data-popup]');
+const modalsButton = document.querySelectorAll('[data-btn-modal]');
+const innerButtonModal = document.querySelectorAll('[data-btn-inner]');
 
 //------------------------------------------------
 
 //----customFunction------------------------------
+const fadeIn = (el, timeout, display) => {
+	el.style.opacity = 0;
+	el.style.display = display || 'block';
+	el.style.transition = `all ${timeout}ms`;
+	setTimeout(() => {
+		el.style.opacity = 1;
+	}, 10);
+};
+
+const fadeOut = (el, timeout) => {
+	el.style.opacity = 1;
+	el.style.transition = `all ${timeout}ms ease`;
+	el.style.opacity = 0;
+
+	setTimeout(() => {
+		el.style.display = 'none';
+	}, timeout);
+};
+
 const toggleCustomClass = (item, customClass = "active") => {
   item.classList.toggle(customClass);
 };
@@ -86,117 +111,6 @@ const elementHeight = (el, variableName) => {
 }
 //------------------------------------------------
 
-//----accordion----------------------------------
-window.addEventListener("DOMContentLoaded", () => {
-  accParrent &&
-    accParrent.map(function (accordionParrent) {
-      if (accordionParrent) {
-        let multipleSetting = false;
-        let breakpoinSetting = false;
-        let defaultOpenSetting;
-
-        if (
-          accordionParrent.dataset.single &&
-          accordionParrent.dataset.breakpoint
-        ) {
-          multipleSetting = accordionParrent.dataset.single; // true - включает сингл аккордион
-          breakpoinSetting = accordionParrent.dataset.breakpoint; // брейкпоинт сингл режима (если он true)
-        }
-
-        const getAccordions = function (dataName = "[data-id]") {
-          return accordionParrent.querySelectorAll(dataName);
-        };
-
-        const accordions = getAccordions();
-        let openedAccordion = null;
-
-        const closeAccordion = function (accordion, className = "active") {
-          accordion.style.maxHeight = 0;
-          removeCustomClass(accordion, className);
-        };
-
-        const openAccordion = function (accordion, className = "active") {
-          accordion.style.maxHeight = accordion.scrollHeight + "px";
-          addCustomClass(accordion, className);
-        };
-
-        const toggleAccordionButton = function (button, className = "active") {
-          toggleCustomClass(button, className);
-        };
-
-        const checkIsAccordionOpen = function (accordion) {
-          return accordion.classList.contains("active");
-        };
-
-        const accordionClickHandler = function (e) {
-          e.preventDefault();
-          let curentDataNumber = this.dataset.id;
-
-          toggleAccordionButton(this);
-          const accordionContent = accordionParrent.querySelector(
-            `[data-content="${curentDataNumber}"]`
-          );
-          const isAccordionOpen = checkIsAccordionOpen(accordionContent);
-
-          if (isAccordionOpen) {
-            closeAccordion(accordionContent);
-            openedAccordion = null;
-          } else {
-            if (openedAccordion != null) {
-              const mobileSettings = () => {
-                let containerWidth = document.documentElement.clientWidth;
-                if (
-                  containerWidth <= breakpoinSetting &&
-                  multipleSetting === "true"
-                ) {
-                  closeAccordion(openedAccordion);
-                  toggleAccordionButton(
-                    accordionParrent.querySelector(
-                      `[data-id="${openedAccordion.dataset.content}"]`
-                    )
-                  );
-                }
-              };
-
-              window.addEventListener("resize", () => {
-                mobileSettings();
-              });
-              mobileSettings();
-            }
-
-            openAccordion(accordionContent);
-            openedAccordion = accordionContent;
-          }
-        };
-
-        const activateAccordion = function (accordions, handler) {
-          for (const accordion of accordions) {
-            accordion.addEventListener("click", handler);
-          }
-        };
-        const accordionDefaultOpen = (currentId) => {
-          const defaultOpenContent = accordionParrent.querySelector(
-            `[data-content="${currentId}"]`
-          );
-          const defaultOpenButton = accordionParrent.querySelector(
-            `[data-id="${currentId}"]`
-          );
-          openedAccordion = defaultOpenContent;
-
-          toggleAccordionButton(defaultOpenButton);
-          openAccordion(defaultOpenContent);
-        };
-
-        if (accordionParrent.dataset.default) {
-          defaultOpenSetting = accordionParrent.dataset.default; // получает id аккордиона который будет открыт по умолчанию
-          accordionDefaultOpen(defaultOpenSetting);
-        }
-
-        activateAccordion(accordions, accordionClickHandler);
-      }
-    });
-});
-
 //----burger------------------------------------
 const mobileMenuHandler = function (overlay, mobileMenu, burgers) {
   burgers.forEach((burger) => {
@@ -222,7 +136,7 @@ const hideMenuHandler = function (overlay, mobileMenu, burgers) {
 if (overlay) {
   mobileMenuHandler(overlay, mobileMenu, burgers);
   overlay.addEventListener("click", function (e) {
-    e.target.classList.contains("h2o-overlay")
+    e.target.classList.contains("overlay")
       ? hideMenuHandler(overlay, mobileMenu, burgers)
       : null;
   });
@@ -253,32 +167,6 @@ function stickyHeaderFunction(breakpoint){
 
 stickyHeaderFunction(320);
 elementHeight(header, "header-height");
-//------replaceEl-------------------------------
-
-  const sidebar = document.querySelector('.h2o-sidebar'),
-        sideBarParent = document.querySelector('.h2o-main-inner'),
-        sideBarParentMob = document.querySelector('.h2o-first-section');
- 
- const replaceElementsFunction = (
-   element,
-   parentDesktop,
-   parentMobile,
-   breakpoint,
-   firstRule,
-   lastRule
- ) => {
-   let containerWidth = document.documentElement.clientWidth;
- 
-   if (element) {
-     if (containerWidth <= `${breakpoint}`) {
-       parentMobile.insertAdjacentElement(`${firstRule}`, element);
-     }
-     if (containerWidth > `${breakpoint}`) {
-       parentDesktop.insertAdjacentElement(`${lastRule}`, element);
-     }
-   }
- };
- 
 
 //---------------------------------------------------
 document.addEventListener('DOMContentLoaded', function (){
@@ -305,7 +193,10 @@ document.addEventListener('DOMContentLoaded', function (){
        
           breakpoints: {
             320: {
-              slidesPerView: 2,
+              slidesPerView: 1.2,
+            },
+            600: {
+              slidesPerView: 1.5,
             },
             1920: {
               slidesPerView: 2.5,
@@ -314,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function (){
       });
   });
 
-  aboutSLiders.forEach(function(slider) {
+  aboutSliders.forEach(function(slider) {
     const container = slider.querySelector('.swiper-container');
     const nextBtn = slider.querySelector(".next");
     const prevBtn = slider.querySelector(".prev");
@@ -322,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function (){
     let aboutSwiper = new Swiper(container, {
         spaceBetween: 20,
         slidesPerView: 1.5,
-        speed: 1800,
+        speed: 1000,
         watchOverflow: true,
         observer: true,
         observeParents: true,
@@ -332,6 +223,18 @@ document.addEventListener('DOMContentLoaded', function (){
         navigation: {
             nextEl: nextBtn,
             prevEl: prevBtn,
+        },
+
+        breakpoints: {
+          320: {
+            slidesPerView: 1.2,
+            spaceBetween: 24,
+          },
+          576: {
+            spaceBetween: 20,
+            slidesPerView: 1.5,
+          },
+        
         }
     });
 
@@ -351,73 +254,48 @@ document.addEventListener('DOMContentLoaded', function (){
     window.addEventListener('resize', updateSwiperOnResize);
 
     updateSwiperOnResize();
-});
-})
-//-----------------------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-  const cards = document.querySelectorAll('.h2o-rating-card');
-  const reviewCards = document.querySelectorAll('.h2o-rewiev-card');
-  const bestCards = document.querySelectorAll('.h2o-best-card');
-
-  cards && cards.forEach(function(card) {
-    const toggleButton = card.querySelector('.h2o-rating-card__toggle');
-    const details = card.querySelector('.h2o-rating-card__details');
-    const content = card.querySelector('.h2o-rating-card__content');
-  
-    toggleButton && toggleButton.addEventListener('click', function() {
-      if (details.style.height && details.style.height !== '0px') {
-        details.style.height = '0';
-        removeCustomClass(toggleButton, 'rotate');
-        removeCustomClass(content, 'active');
-      } else {
-        details.style.height = details.scrollHeight + 'px';
-        addCustomClass(toggleButton, 'rotate');
-        addCustomClass(content, 'active');
-      }
-    });
   });
 
-  reviewCards && reviewCards.forEach(function(card){
-    const front = card.querySelector('.h2o-rewiev-card__front');
-    const back = card.querySelector('.h2o-rewiev-card__back')
-    const btns = card.querySelectorAll('.h2o-rewiev-card__info');
+  historySliders.forEach(function(slider) {
+    const container = slider.querySelector('.swiper-container');
+    const nextBtn = slider.querySelector(".next");
+    const prevBtn = slider.querySelector(".prev");
 
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        toggleCustomClass(front, 'active');
-        toggleCustomClass(back, 'active');
-      })
-    })
-  })
+    const mainSwiper = new Swiper(container, {
+        spaceBetween: 30,
+        slidesPerView: 1.3,
+        speed: 1000,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        centeredSlides: true,
+        navigation: {
+            nextEl: nextBtn,
+            prevEl: prevBtn,
+        },
 
-  bestCards && bestCards.forEach(card => {
-    const toggleBlock = card.querySelector('.h2o-best-card__hide');
-    const toggleButton = card.querySelector('.h2o-best-card__show-btn');
-
-    toggleButton.addEventListener('click', function() {
-        if (toggleBlock.classList.contains('open')) {
-            toggleBlock.style.height = toggleBlock.scrollHeight + 'px';
-            toggleBlock.offsetHeight; 
-            toggleBlock.style.height = '0';
-            setTimeout(() => {
-                removeCustomClass(toggleBlock, 'open');
-            }, 500);
-            removeCustomClass(toggleButton, 'open');
-        } else {
-            toggleBlock.style.height = toggleBlock.scrollHeight + 'px';
-            addCustomClass(toggleBlock, 'open');
-            setTimeout(() => {
-                toggleBlock.style.height = 'auto';
-            }, 500);
-            addCustomClass(toggleButton, 'open');
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                centeredSlides: false,
+            },
+            768: {
+                slidesPerView: 1.2,
+            },
+            1024: {
+                slidesPerView: 1,
+                centeredSlides: true,
+            },
+            1240: {
+                slidesPerView: 1.15,
+            }
         }
     });
 });
-});
 
+})
 //-----------------------------------------------------
-const navLinks = document.querySelectorAll('.h2o-nav a');
+const navLinks = document.querySelectorAll('.main-nav a');
 
 if (navLinks.length > 0) {
     navLinks.forEach(anchor => {
@@ -426,10 +304,212 @@ if (navLinks.length > 0) {
 
             const targetElement = document.querySelector(this.getAttribute('href'));
             if (targetElement) {
+              if(header.classList.contains('active')){
+                  hideMenuHandler(overlay, mobileMenu, burgers);
+              }
+              
                 targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
+               
             }
         });
     });
 }
+
+//------------timer--------------------
+document.addEventListener('DOMContentLoaded', function() {
+  const timerElement = document.querySelector('.timer');
+
+  if (timerElement) {
+      const endTimeStr = timerElement.getAttribute('data-time');
+      const endTime = new Date(endTimeStr).getTime();
+
+      const updateTimer = function() {
+          const now = new Date().getTime();
+          const difference = endTime - now;
+
+          if (difference <= 0) {
+              clearInterval(interval);
+              timerElement.querySelectorAll('.timer__value').forEach((item) => {
+                  item.textContent = '00';
+              });
+              return;
+          }
+
+          const remainingDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const remainingHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const remainingMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+          const remainingSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          timerElement.querySelector('.timer__days').textContent = remainingDays.toString().padStart(2, '0');
+          timerElement.querySelector('.timer__hours').textContent = remainingHours.toString().padStart(2, '0');
+          timerElement.querySelector('.timer__minutes').textContent = remainingMinutes.toString().padStart(2, '0');
+          timerElement.querySelector('.timer__seconds').textContent = remainingSeconds.toString().padStart(2, '0');
+      };
+
+      if (new Date().getTime() >= endTime) {
+          timerElement.querySelectorAll('.timer__value').forEach((item) => {
+              item.textContent = '00';
+          });
+      } else {
+          updateTimer();
+          const interval = setInterval(updateTimer, 1000);
+      }
+  }
+});
+//-------------------------tabs----------------
+
+const tabsFunction = function (
+  tabsDataInitArray,
+  tabsNavAttr,
+  tabsContentAttr,
+  active = "active"
+) {
+  tabsDataInitArray &&
+    tabsDataInitArray.forEach((tabParent) => {
+      if (tabParent) {
+        const tabNav = [...tabParent.querySelectorAll(`[${tabsNavAttr}]`)];
+        const tabContent = [
+          ...tabParent.querySelectorAll(`[${tabsContentAttr}]`),
+        ];
+
+        tabNav.forEach((nav) => {
+          nav.addEventListener("click", (e) => {
+            e.preventDefault();
+            const activeTabAttr = e.target.getAttribute(`${tabsNavAttr}`);
+            removeClassInArray(tabNav, active);
+            removeClassInArray(tabContent, active);
+            addCustomClass(
+              tabParent.querySelector(`[${tabsNavAttr}="${activeTabAttr}"]`),
+              active
+            );
+            addCustomClass(
+              tabParent.querySelector(
+                `[${tabsContentAttr}="${activeTabAttr}"]`
+              ),
+              active
+            );
+
+            const joinContent = tabParent.querySelector('.join-content');
+            if(joinContent){
+              if (!joinContent.classList.contains('active'))  {
+                addCustomClass(count, 'active');
+                addCustomClass(firstCount, 'mode');
+              } else {
+                removeCustomClass(count, 'active');
+                removeCustomClass(firstCount, 'mode');
+              }
+            }
+          });
+        });
+      }
+    });
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  tabsFunction(document.querySelectorAll("[data-tabs-parrent]"), "data-tab", "data-tab-content");
+});
+
+//--------------modals----------------------
+
+ function modalClickHandler(attribute, activeClass, overlayClass = activeClass) {
+  const curentModal = overlay.querySelector(`[data-popup="${attribute}"]`);
+  removeClassInArray(modals, activeClass);
+  modals.forEach(function(modal){
+    fadeOut(modal, 0);
+  })
+  addCustomClass(overlay, overlayClass);
+  addCustomClass(curentModal, activeClass);
+  setTimeout(function () {
+    fadeIn(curentModal, 200);
+  }, 200);
+  disableScroll();
+
+  innerButton = overlay.querySelector(`${"[data-popup]"}.${activeClass} .close`);
+}
+
+let innerButton;
+const commonFunction = function () {
+  removeCustomClass(overlay, activeMode);
+  removeCustomClass(overlay, activeClass);
+  removeClassInArray(modals, activeClass);
+
+  modals.forEach((modal) => fadeOut(modal, 300))
+  enableScroll();
+};
+
+function findAttribute(element, attributeName) {
+  let target = element;
+  while (target && target !== document) {
+    if (target.hasAttribute(attributeName)) {
+      return target.getAttribute(attributeName);
+    }
+    target = target.parentNode;
+  }
+  return null;
+}
+
+function buttonClickHandler(e, buttonAttribute, activeClass) {
+  e.preventDefault();
+  const currentModalId = findAttribute(e.target, buttonAttribute);
+  if (!currentModalId) {return}
+
+  const currentModal = overlay.querySelector(`[data-popup="${currentModalId}"]`);
+
+  mobileMenu && removeCustomClass(mobileMenu, activeClass);
+  burgers && removeClassInArray(burgers, activeClass);
+
+  removeClassInArray(modals, activeClass);
+  addCustomClass(overlay, activeClass);
+  addCustomClass(overlay, activeMode);
+  addCustomClass(currentModal, activeClass);
+  fadeIn(currentModal, 200, 'flex');
+
+  disableScroll();
+  innerButton = overlay.querySelector(`${"[data-popup]"}.${activeClass} .close`);
+}
+
+function overlayClickHandler(e, activeClass) {
+  if (e.target === overlay || e.target === innerButton) commonFunction();
+}
+
+function modalInit(buttonsArray, buttonAttribute, activeClass) {
+  buttonsArray.forEach(function (btn) {
+    btn.addEventListener("click", (e) =>
+        buttonClickHandler(e, buttonAttribute, activeClass)
+    );
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  overlay && overlay.addEventListener("click", function (e) {
+    overlayClickHandler(e, activeClass);
+  });
+
+  modalInit(modalsButton, "data-btn-modal", activeClass);
+
+  innerButtonModal && innerButtonModal.forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      enableScroll();
+      e.preventDefault();
+
+      const prevId = findAttribute(this.closest('[data-popup]'), 'data-popup');
+      if (!prevId) {return}
+
+      const currentModalId = this.getAttribute("data-btn-inner");
+      const currentModal = overlay.querySelector(`[data-popup="${currentModalId}"]`);
+      removeClassInArray(modals, activeClass);
+      addCustomClass(overlay, activeClass);
+      fadeOut(document.querySelector(`[data-popup="${prevId}"]`), 0);
+      fadeIn(currentModal, 200);
+      addCustomClass(currentModal, activeClass);
+      disableScroll();
+    
+      innerButton = overlay.querySelector(`${"[data-popup]"}.${activeClass} .close`);
+    });
+  });
+});
+
+
+

@@ -1,0 +1,101 @@
+.history-slider {
+  position: relative;
+  width: 100%;
+  margin-top: 30px;
+
+  @include tablet {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+  }
+
+  &__link {
+    position: absolute;
+    right: 150px;
+    top: 0;
+    width: max-content;
+    font-family: var(--second-family);
+    font-size: 25px;
+    background: rgba(var(--bg-c), 1);
+    border: 3px solid var(--br-a);
+    box-shadow: 0 0 32px #f5882d82;
+    color: rgba(var(--cl-a), 1);
+    -webkit-text-stroke: 4px var(--br-a);
+    paint-order: stroke fill;
+    font-weight: 500;
+    transform: translateY(-50%) rotate(-3deg);
+    padding: 10px 25px;
+    z-index: 2;
+
+    @include mobile{
+      font-size: 18px;
+    }
+
+    @include ios{
+      right: initial;
+      left: 35px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    width: 66px;
+    aspect-ratio: 1;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 5;
+
+    &.swiper-button-disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.prev {
+      transform: scaleX(-1);
+      top: 36%;
+      left: -5%;
+      height: 95px;
+      width: 80px;
+
+      @include tablet {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) scaleX(-1);
+      }
+    }
+
+    &.next {
+      top: 36%;
+      right: 15%;
+      height: 95px;
+      background: none;
+      width: 80px;
+
+      @include tablet {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0px;
+      }
+    }
+  }
+
+  .swiper {
+    &-container {
+      max-width: 100%;
+      padding: 0 100px 0 0;
+
+      @include tablet {
+        padding: 0 16px;
+      }
+    }
+
+    &-slide {
+      opacity: 0.5;
+      transition: opacity 0.4s;
+
+      &-active {
+        opacity: 1;
+      }
+    }
+  }
+}

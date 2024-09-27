@@ -1,0 +1,71 @@
+.history-section{
+    position: relative;
+    padding: 200px 0 140px;
+
+    @include tablet{
+        padding: 240px 0 140px;
+    }
+
+    @include small-tablet{
+        padding: 20px 0 50px;
+    }
+
+    &__box{
+        display: flex;
+        justify-content: space-between;
+        grid-gap: 24px;
+
+        @include tablet{
+            flex-direction: column;
+        }
+    }
+
+    &__inner{
+        flex: 0 0 auto;
+        position: relative;
+
+        .title{
+            left: 98px;
+            top: -20px;
+            paint-order: stroke fill;
+            position: relative;
+            transform: rotate(-3deg);
+
+            @include small-tablet{
+                left: 0;
+                font-size: 33px;
+            }
+        }
+
+        @include for-tablet{
+            width: 66.66666667%;
+        }
+
+        @include tablet{
+            width: 100%;
+            order: -1;
+        }
+    }
+
+    &__image{
+        flex: 0 0 auto;
+
+        @include for-tablet{
+            width: 33.33333333%;
+        }
+
+        @include tablet{
+            width: 100%;
+        }
+
+        img,picture{
+            width: 100%;
+            vertical-align: middle;
+
+            @include for-tablet{
+                transform: scale(1.2);
+                margin-top: 5%;
+            }
+        }
+    }
+}

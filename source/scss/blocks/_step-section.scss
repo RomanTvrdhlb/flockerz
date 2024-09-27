@@ -1,6 +1,10 @@
 .step-section{
     position: relative;
     padding: 80px 0;
+
+    @media (max-width: (1380px)) {
+        padding-bottom: 160px;
+     }
     
     .title{
         position: absolute;
@@ -8,6 +12,31 @@
         top: -51px;
         z-index: 2;
         paint-order: stroke fill;
-        transform: rotate(-3deg);
+        transform: translateY(-100%) rotate(-3deg);
+
+        @include tablet{
+            font-size: clamp(26px, 4.297vw, 44px);
+        }
+
+        @include small-tablet{
+            left: 50%;
+            transform: translate(-50%, -100%) rotate(-3deg);
+        }
+    }
+
+    &__box{
+        position: relative;
+    }
+
+    .main-link{
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%) rotate(3deg);
+        z-index: 4;
+        bottom: 30px;
+
+        @media (max-width: (1380px)) {
+           bottom: -75px;
+        }
     }
 }

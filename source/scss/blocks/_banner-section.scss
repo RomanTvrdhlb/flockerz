@@ -1,0 +1,299 @@
+.banner-section{
+    position: relative;
+    padding-top: 60px;
+    background: url(../img/sprite/banner-bg.svg) no-repeat center right / contain;
+
+    @include desktop{
+        margin-top: -50px;
+    }
+
+    @include small-tablet{
+        padding: 100px 0;
+        overflow: hidden;
+    }
+
+    &__mob{
+        @include for-small-tablet{
+            display: none;
+        }
+
+        @include small-tablet{
+            display: block;
+        }
+
+        background-color: rgba(var(--bg-b),1.0);
+        height: 340px;
+        clip-path: polygon(0% 84%, 100% 4%, 100% 100%, 0% 100%);
+        margin:-230px -6px 0 -16px;
+        z-index: -1;
+        position: relative;
+
+        &:before{
+            background: url(../img/sprite/about.svg) no-repeat bottom right / contain;
+            height: 100%;
+            background-size: 170%;
+            inset: 0;
+            clip-path: polygon(0% 86%, 100% 6%, 100% 100%, 0% 100%);
+            z-index: -1;
+            position: absolute;
+            content: '';
+            background-color: rgba(var(--bg-b),1.0);
+        }
+
+        @include ios{
+            margin-top: -240px;
+        }
+    }
+
+    &__box{
+        background: url(../img/sprite/about.svg) no-repeat bottom right / contain;
+        position: relative;
+        margin-top: 48px;
+
+        @include desktop{
+            @include for-tablet{
+                background-size: 100%;
+            }
+        }
+
+        @include tablet{
+            background-size: unset;
+        }
+
+        @include small-tablet{
+            background: initial;
+        }
+    }
+
+    &__inner{
+        display: flex;
+        flex-direction: column;
+       
+        z-index: 1;
+        position: relative;
+        border: 6px solid var(--br-a);
+        background: rgba(var(--bg-b),1.0);
+
+        @include for-desktop{
+            clip-path: polygon(0% 0%, 98% 0%, -19% 190%, 0% 100%);
+        }
+
+        @include desktop{
+            clip-path: polygon(0% 0%,101% 0%,-19% 190%,0% 100%);
+        }
+
+        @include for-small-tablet{
+            grid-gap: 48px;
+            padding: 40px;
+            max-width: 99%;
+            min-height: 570px;
+        }
+        
+        @include small-tablet{
+            padding: 40px 20px 250px 30px;
+            max-width: 105%;
+            border-left-width: 0;
+            border-right-width: 0;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 72%, 0% 100%);
+            margin: 0 -16px;
+            grid-gap: 24px;
+        }
+
+        
+
+        &::before{
+            position: absolute;
+            content: '';
+            inset: 0;
+            z-index: -1;
+            background-color: rgba(var(--bg-d),1.0);
+
+            @include for-desktop{
+                clip-path: polygon(0% 0%, 97% 0%, -19% 190%, 0% 100%);
+            }
+
+            @include desktop{
+                clip-path: polygon(0% 0%,100% 0%,-19% 190%,0% 100%);
+            }
+
+            @include small-tablet{
+                background: rgba(var(--bg-e),1.0);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 72%, 0% 100%);
+                inset: 0 5px 0 0;
+            }
+        }
+
+        .main-btn{
+            transform: rotate(-3deg);
+            box-shadow: 0 0 32px #f5882d82;
+            font-size: 26px;
+            margin-left: 24px;
+
+            @include small-tablet{
+                width: 98%;
+                margin-left: -3%;
+            }
+        }
+    }
+
+    &__bottom{
+        display: flex;
+
+        @include for-laptop{
+            margin-top: 18px;
+        }
+
+        @include laptop{
+                flex-direction: column;
+                grid-gap: 10px;
+        }
+
+        @include for-small-tablet{
+            max-width: 53%;
+        }
+
+        @include small-tablet{
+            align-items: center;
+        }
+    }
+
+    &__text{
+        -webkit-text-stroke: 5px rgba(var(--cl-b),1.0);
+        paint-order: stroke fill;
+        padding: 0 15px;
+        color: rgba(var(--cl-e),1.0);
+        font-size: 35px;
+        font-family: var(--second-family);
+        transform: rotate(-3deg);
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 18px;
+
+        p{
+            font-weight: 500;
+            font-size: 22px;
+
+            @include small-tablet{
+                font-size: 17px;
+            }
+        }
+
+        @include for-small-tablet{
+            max-width: 53%;
+        }
+    }
+
+    &__image{
+        position: absolute;
+        right: 20px;
+        bottom: -45px;
+        max-width: 700px;
+        z-index: 3;
+
+        @include laptop{
+            @include for-tablet{
+                max-width: 600px;
+                right: -5%;
+            }
+        }
+
+        @include tablet{
+            @include for-small-tablet{
+                right: -2%;
+                bottom: -30px;
+                max-width: 450px;
+            }
+        }
+
+        @include small-tablet{
+            bottom: 0;
+            z-index: 5;
+            left: 25%;
+            max-width: 431px;
+            transform: translate(-50%);
+        }
+
+        @include mobile{
+            bottom: -2%;
+        }
+
+        &.mode{
+            top: -180px;
+            left: 20px;
+            width: 480px;
+            right: initial;
+            bottom: initial;
+        
+            @include small-tablet{
+                width: 300px;
+                top: -100px;
+                left: 24px;
+                z-index: 2;
+                transform: none;
+            }
+        }
+
+        img,picture{
+            width: 100%;
+        }
+    }
+
+    &__icon{
+        position: absolute;
+        top: -190px;
+        right: 0;
+        width: 360px;
+        height: auto;
+        z-index: 3;
+
+        @include small-tablet{
+            position: absolute;
+            right: -46px;
+            width: 53%;
+            top: auto;
+            transform: rotate(11deg);
+
+            @include for-mobile{
+                bottom: 2%;
+            }
+        }
+
+        @include mobile{
+            bottom: 14%;
+        }
+
+        &.mode{
+            bottom: -230px;
+            width: 382px;
+            height: 278px;
+            top: initial;
+            right: initial;
+
+            @include for-tablet{
+                left: 201px;
+            }
+
+            @include tablet{
+               left: 50px;
+            }
+
+            @include small-tablet{
+                width: 200px;
+                left: -15%;
+                bottom: -26%;
+            }
+
+            @include ios{
+                width: 150px;
+            }
+        }
+
+        img,svg{
+            height: auto;
+            width: 100%;
+        }
+    }
+}

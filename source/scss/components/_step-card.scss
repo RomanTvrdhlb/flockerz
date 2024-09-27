@@ -24,7 +24,6 @@
     display: flex;
     flex-direction: column;
     grid-gap: 8px;
-    padding: 40px 40px 60px;
     position: relative;
     z-index: 2;
     clip-path: polygon(0% 0%, 100% 0%, 68% 190%, 0% 100%);
@@ -41,14 +40,35 @@
       background: rgba(var(--bg-e), 1);
       clip-path: polygon(0% 0%, 100% 0%, 68% 190%, 0% 100%);
     }
+
+    @include for-mobile {
+      padding: 40px 40px 60px;
+    }
+
+    @include mobile {
+      padding: 20px 40px 20px 20px;
+    }
   }
 
   &__image {
     position: absolute;
-    width: 200px;
-    height: 200px;
     top: 86px;
-    right: 78px;
+
+    @include for-tablet {
+      width: Min(13.459vw, 200px);
+      height: Min(13.459vw, 200px);
+      right: 78px;
+    }
+
+    @include tablet {
+      width: Min(19.531vw, 200px);
+      height: Min(19.531vw, 200px);
+      right: 100px;
+    }
+
+    @include small-tablet {
+      display: none;
+    }
 
     img,
     svg {
@@ -58,7 +78,7 @@
   }
 
   &__label {
-    background: #2045ca;
+    background: rgba(var(--bg-f),1.0);
     border-radius: 50px;
     position: absolute;
     right: 109px;
@@ -70,6 +90,7 @@
     align-items: center;
     justify-content: center;
     grid-gap: 8px;
+    white-space: nowrap;
 
     &::before {
       content: "";
@@ -82,30 +103,56 @@
       -webkit-text-stroke: 3px var(--br-a);
       paint-order: stroke fill;
       letter-spacing: 1.1px;
+
+      @include mobile {
+        padding: 8px;
+      }
     }
 
-    font-size: 16px;
     color: rgba(var(--cl-a), 1);
     -webkit-text-stroke: 3px var(--br-a);
     paint-order: stroke fill;
     letter-spacing: 1.1px;
     text-transform: uppercase;
+
+    @include for-mobile {
+      font-size: 16px;
+    }
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   &__title {
-    font-family: badaboom-bb, sans-serif;
+    font-family: var(--second-family);
     font-size: 48px;
     color: rgba(var(--cl-b), 1);
     margin-bottom: 8px;
   }
 
   ul {
-    width: 500px;
     display: flex;
     flex-direction: column;
 
+    @include for-tablet {
+      width: 500px;
+    }
+
+    @include tablet {
+      width: 100%;
+
+      @include for-small-tablet {
+        max-width: Min(48.828vw, 500px);
+      }
+    }
+
+    @include small-tablet {
+      max-width: 90%;
+    }
+
     li {
-      font-family: HeyComic, sans-serif;
+      font-family: var(--font-family);
       font-size: clamp(15px, 1.2113vw, 18px);
       color: rgba(var(--cl-b), 1);
       padding-left: 16px;
@@ -137,6 +184,16 @@
       &__label {
         right: 50%;
         transform: translateX(50%);
+
+        @include desktop {
+          @include for-tablet {
+            transform: translateX(150%);
+          }
+        }
+
+        @include mobile{
+          transform: translateX(85%);
+        }
       }
 
       &__bottom {
@@ -144,18 +201,50 @@
       }
 
       &__box {
-        padding-left: 260px;
         clip-path: polygon(16% 0%, 137% 0%, 68% 190%, 0% 100%);
 
+        @include for-desktop {
+          padding-left: 260px;
+        }
+
+        @include desktop {
+          @include for-tablet {
+            padding-left: Min(17.4966vw, 260px);
+          }
+        }
+
+        @include tablet {
+          @include for-small-tablet {
+            padding-left: clamp(200px, 27.344vw, 280px);
+          }
+        }
+
+        @include small-tablet {
+          @include for-mobile{
+            padding-left: 100px;
+          }
+        }
+
+        @include mobile{
+          padding: 20px 10px 20px 80px;
+        }
+
         &::before {
-          background: #c1daea;
+          background: rgba(var(--bg-d),1.0);
           clip-path: polygon(16% 0%, 137% 0%, 68% 190%, 0% 100%);
         }
       }
 
       &__image {
         top: 65px;
-        left: 60px;
+
+        @include for-tablet {
+          left: 60px;
+        }
+
+        @include tablet {
+          left: 80px;
+        }
       }
     }
   }
@@ -164,16 +253,27 @@
     .step-card {
       &__label {
         right: 265px;
+
+        @media (max-width: (1380px)) {
+          @include for-tablet {
+            left: 25px;
+          }
+        }
+
+        @include mobile{
+          left: 50%;
+          transform: translateX(-45%);
+        }
       }
 
       &__bottom {
         width: 100%;
       }
 
-      &__box{
-        clip-path: polygon(0% 0%,82% 0%,100% 100%,0% 100%);
-        &::before{
-            clip-path: polygon(0% 0%,82% 0%,100% 100%,0% 100%);
+      &__box {
+        clip-path: polygon(0% 0%, 82% 0%, 100% 100%, 0% 100%);
+        &::before {
+          clip-path: polygon(0% 0%, 82% 0%, 100% 100%, 0% 100%);
         }
       }
 

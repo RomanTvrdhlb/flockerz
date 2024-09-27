@@ -1,37 +1,79 @@
-.step-list{
-    display: flex;
-    flex-direction: column;
+.step-list {
+  display: flex;
+  flex-direction: column;
+
+  @include for-tablet {
     grid-gap: 16px;
+  }
 
-    &__bg{
-        display: none;
-    }
+  @include tablet {
+    grid-gap: 48px;
+  }
 
-    &__item{
-        --bs-gutter-x: 24px;
-  
-        display: flex;
-        flex-wrap: wrap;
-        margin-right: calc(-.5* var(--bs-gutter-x));
-        margin-left: calc(-.5* var(--bs-gutter-x));
+  &__bg {
+    display: none;
+  }
 
-        .step-card{
-            flex: 0 0 auto;
-            width: 58.33333333%;
-            position: relative;
-            max-width: 100%;
-            padding-right: calc(var(--bs-gutter-x)* .5);
+  &__item {
+    --bs-gutter-x: 24px;
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+
+    .step-card {
+      position: relative;
+      max-width: 100%;
+    
+      @media (min-width: (1380px)) {
+        width: 58.33333333%;
+      }
+      
+      @media (max-width: (1380px)) {
+        @include for-tablet {
+          width: 74.33333333%;
         }
+      }
 
-        &:nth-child(even){
-            flex-direction: row-reverse;
-        }
-    }
-
-    &__image{
+      @include for-tablet {
         flex: 0 0 auto;
-        width: 41.66666667%;
-        max-width: 100%;
-        padding-right: calc(var(--bs-gutter-x)* .5);
+       
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+      }
+
+      @include tablet {
+        width: 100%;
+      }
     }
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    @include tablet {
+      display: contents;
+
+      &:last-of-type {
+        .step-list__image {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  &__image {
+    flex: 0 0 auto;
+    width: 41.66666667%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+
+    @media (max-width: (1380px)) {
+      width: 25.66666667%;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
 }

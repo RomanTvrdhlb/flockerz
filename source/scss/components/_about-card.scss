@@ -8,7 +8,7 @@
         font-size: 24px;
         line-height: 28px;
         font-weight: 500;
-        font-family: badaboom-bb, sans-serif;
+        font-family: var(--second-family);
         color: #f0b90b;
         -webkit-text-stroke: 3px black;
         paint-order: stroke fill;
@@ -17,7 +17,7 @@
 
     p{
         text-align: start;
-        font-family: HeyComic, sans-serif;
+        font-family: var(--font-family);
         color: #c1daea;
         line-height: 25px;
         letter-spacing: 1px;

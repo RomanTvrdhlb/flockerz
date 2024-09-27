@@ -5,7 +5,7 @@
   width: 100%;
 
   &__title {
-    font-family: badaboom-bb, sans-serif;
+    font-family: var(--second-family);
     font-size: 32px;
     font-weight: 500;
     line-height: 1.2;
@@ -13,9 +13,13 @@
   }
 
   p {
-    font-family: HeyComic, sans-serif;
+    font-family: var(--font-family);
     font-size: 16px;
     line-height: 28px;
+
+    @include mobile{
+      line-height: 135%;
+    }
   }
 
   &.one {
@@ -34,7 +38,7 @@
 
     @include mobile{
         padding: 71px 50px 35px;
-        min-width: 514px;
+        // min-width: 514px;
     }
   }
 
@@ -54,7 +58,6 @@
 
     @include mobile{
         padding: 38px 50px 80px;
-        min-width: 514px;
     }
   }
 
@@ -74,7 +77,7 @@
 
     @include mobile{
         padding: 100px 50px 40px;
-        min-width: 514px;
+       
     }
   }
 
@@ -93,8 +96,8 @@
     }
 
     @include mobile{
+      margin-left: -15px;
         padding: 40px 38px 70px 78px;
-        min-width: 514px;
     }
   }
 }
